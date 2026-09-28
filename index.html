@@ -159,6 +159,9 @@ if (location.search.includes("paid=1")) {
   msg.textContent = "Thank you! Your payment went through. A receipt is on its way to your email.";
   history.replaceState(null, "", "/");
 }
+
+renderProducts();
+renderCart();
 </script>
 </body>
 </html>

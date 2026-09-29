@@ -49,6 +49,12 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--moss); outline-
 .checkout-box input { display: block; width: 100%; margin-top: .3rem; padding: .6rem; border: 1px solid var(--line); border-radius: 4px; font: inherit; background: transparent; color: var(--ink); }
 .checkout-box .btn { margin-top: 1rem; width: 100%; }
 .err { color: #d64545; margin: .6rem 0 0; }
+.success { padding: 6rem 2rem; max-width: 40rem; }
+.success h1 { font-size: clamp(2rem, 6vw, 3.5rem); line-height: 1.05; margin: 0 0 1rem; font-weight: 800; }
+.success p { margin: 0 0 1.5rem; }
+.success { padding: 5rem 2rem; max-width: 40rem; }
+.success h1 { font-size: clamp(2rem, 6vw, 4rem); line-height: 1.05; margin: 0 0 1rem; font-weight: 800; }
+.success p { margin: 0 0 1.5rem; }
 </style>
 </head>
 <body>
@@ -58,6 +64,12 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--moss); outline-
   </header>
 
   <main>
+    <section id="success" class="success" hidden>
+      <h1>Thank you for your order.</h1>
+      <p>Your payment went through. We will send your sunglasses to the address you entered at checkout.</p>
+      <a class="btn" href="/">Back to the shop</a>
+    </section>
+
     <section class="hero">
       <h1>Sunglasses for long light.</h1>
       <p>Acetate frames, tinted lenses, four shapes. Free returns for 30 days.</p>
@@ -66,6 +78,12 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--moss); outline-
 
     <section id="products" class="grid" aria-label="Products"></section>
   </main>
+
+  <section id="success" class="success" hidden>
+    <h1>Thank you for your order.</h1>
+    <p>Your payment went through. Your order is now with us.</p>
+    <a class="btn" href="/">Continue shopping</a>
+  </section>
 
   <aside id="cart" class="cart" hidden aria-label="Your cart">
     <h2>Your cart</h2>
@@ -155,8 +173,9 @@ checkoutBtn.addEventListener("click", async () => {
 });
 
 if (location.search.includes("paid=1")) {
-  document.getElementById("cart").hidden = false;
-  msg.textContent = "Thank you! Your payment went through. A receipt is on its way to your email.";
+  document.querySelector(".hero").style.display = "none";
+  document.getElementById("products").style.display = "none";
+  document.getElementById("success").hidden = false;
   history.replaceState(null, "", "/");
 }
 
